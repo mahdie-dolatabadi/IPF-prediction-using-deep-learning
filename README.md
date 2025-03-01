@@ -17,4 +17,20 @@ IPF-prediction-using-deep-learning/
 │── .gitignore            # Git ignore file
 
 
+# Navigate to your project directory
+cd IPF-prediction-using-deep-learning
+
+# Create folders for region growing technique
+mkdir -p region_growing/matlab_code region_growing/python_code
+
+# Create folders for main model and config
+mkdir -p model/config model/main_code model/utils model/results
+
+# Create other necessary folders
+mkdir -p dataset diagrams
+
+# Create README.md files for subdirectories
+touch region_growing/README.md model/README.md
+
+
 
