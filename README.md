@@ -7,30 +7,19 @@ Welcome to the IPF Prediction Using Deep Learning project! Idiopathic pulmonary 
 This repository presents a deep learning approach to predict the progression of IPF using the Kaggle Pulmonary Fibrosis Progression dataset, which includes computed tomography images and clinical information. By leveraging a proposed context-aware sequential-parallel hybrid transformer model and enriching predictions with clinical information, the method achieved a Laplace Log-Likelihood score of −6.508, outperforming previous techniques. This work highlights the potential of advanced deep learning models in providing accurate predictions, aiding in the diagnosis and management of IPF. The overview of the proposed method is shown in figure below:
 ![Alt Text](images/overview.png)
 ### 📂 Repository Structure
-IPF-prediction-using-deep-learning/
-│── RegionGrowing/          # MATLAB scripts for data preprocessing and modeling
-│── model/          # Python scripts for deep learning model training and evaluation
-│── dataset/              # Sample dataset or links to dataset sources
-│── results/              # Results and performance metrics
-│── images/             # PNG diagrams illustrating the workflow
-│── README.md             # Project description and setup guide
-│── .gitignore            # Git ignore file
-
-
-# Navigate to your project directory
-cd IPF-prediction-using-deep-learning
-
-# Create folders for region growing technique
-mkdir -p region_growing/matlab_code region_growing/python_code
-
-# Create folders for main model and config
-mkdir -p model/config model/main_code model/utils model/results
-
-# Create other necessary folders
-mkdir -p dataset diagrams
-
-# Create README.md files for subdirectories
-touch region_growing/README.md model/README.md
-
+IPF-prediction-using-deep-learning/ 
+│── region_growing/ # Folder for the region growing technique
+│ ├── matlab_code/ # MATLAB scripts for region growing
+│ ├── python_code/ # Python implementation (if any)
+│ ├── README.md # Explanation of the region growing method
+│── model/ # Main model and configuration files
+│ ├── config/ # Configuration files (hyperparameters, settings, etc.)
+│ ├── main_code/ # Main scripts for training/testing
+│ ├── utils/ # Utility functions and helper scripts
+│ ├── results/ # Model outputs, logs, and performance reports
+│── dataset/ # Dataset files or dataset links
+│── diagrams/ # Workflow diagrams in PNG format
+│── README.md # Main project documentation
+│── .gitignore # Ignore unnecessary files
 
 
