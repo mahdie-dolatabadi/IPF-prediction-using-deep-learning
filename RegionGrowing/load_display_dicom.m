@@ -1,23 +1,27 @@
-% Define the file path with a wildcard to allow selection of any file type
-FilePath = ("/MATLAB Drive/*.*");  
+function MR = load_display_dicom()
+    % Define the file path with a wildcard for selection
+    FilePath = ("/MATLAB Drive/*.dcm");  
 
-% Open a file selection dialog and get the chosen file name and path
-[dFILENAME, dPATHNAME] = uigetfile(FilePath, 'File Open');  
+    % Open file selection dialog
+    [dFILENAME, dPATHNAME] = uigetfile(FilePath, 'File Open');  
 
-% Construct the full file path
-filename = [dPATHNAME dFILENAME];  
+    % Check if user canceled selection
+    if isequal(dFILENAME, 0)
+        disp('User canceled file selection.');
+        MR = [];  % Return empty if no file is selected
+        return;
+    end
 
-% Read DICOM metadata from the selected file
-info = dicominfo(filename);  
+    % Construct full filename and read DICOM data
+    filename = fullfile(dPATHNAME, dFILENAME);
+    info = dicominfo(filename);
+    MR = dicomread(info);
 
-% Read the DICOM image data
-MR = dicomread(info);  
+    % Display the image
+    figure, imagesc(MR), title('RAW MR IMAGE');
+    figure; imshow(MR, []);
 
-% Display the raw MR image using imagesc (scales intensity values)
-figure, imagesc(MR), title('RAW MR IMAGE');
+    % Convert to double for further processing
+    MR = double(MR);
+end
 
-% Display the image using imshow with automatic intensity scaling
-figure; imshow(MR, []);  
-
-% Convert the image data to double precision for further processing
-MR = double(MR);
