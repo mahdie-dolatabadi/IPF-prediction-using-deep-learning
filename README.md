@@ -11,14 +11,11 @@ This repository presents a deep learning approach to predict the progression of 
 ```plaintext
 IPF-prediction-using-deep-learning/
 │── region_growing/ # Folder for the region growing technique
-│   ├── matlab_code/ # MATLAB scripts for region growing
-│   ├── python_code/ # Python implementation (if any)
-│   ├── README.md # Explanation of the region growing method
+│   ├── main.m # MATLAB scripts for region growing
 │── model/ # Main model and configuration files
-│   ├── config/ # Configuration files (hyperparameters, settings, etc.)
-│   ├── main_code/ # Main scripts for training/testing
-│   ├── utils/ # Utility functions and helper scripts
-│   ├── results/ # Model outputs, logs, and performance reports
+│   ├── config.py # Configuration files (hyperparameters, settings, etc.)
+│   ├── main.py # Main scripts for training/testing
+│   ├── utils.py # Utility functions and helper scripts
 │── dataset/ # Dataset files or dataset links
 │── diagrams/ # Workflow diagrams in PNG format
 │── README.md # Main project documentation
