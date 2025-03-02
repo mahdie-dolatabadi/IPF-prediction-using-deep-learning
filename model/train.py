@@ -1,7 +1,7 @@
 import torch
 from transformers import ViTHybridModel
 from torchvision import models  # Pretrained models
-from utils import FeatureTransformer, DecisionStep
+from utils import FeatureTransformer, DecisionStep, UnlearnableIdentityConvModel
 from configs import HyperParameters  # Hyperparameter configuration object
 
 params = HyperParameters("slope_train_vit_simple")
@@ -47,7 +47,7 @@ class TabCT(torch.nn.Module):
         # change configuration
         self.input_channel_after_mul = 64
         self.input_size_after_mul = 192
-        
+
         # Adjust ViT configuration to work with our input size and channels
         self.con1.config.num_channels = self.input_channel_after_mul
         self.con1.config.image_size = self.input_size_after_mul
@@ -62,8 +62,8 @@ class TabCT(torch.nn.Module):
         self.conv = self.con1.embeddings.patch_embeddings.backbone.bit.embedder.convolution
 
         # First Mask Layer
-        self.W = nn.Parameter(torch.nn.init.trunc_normal_(torch.empty((64, 3, 7, 7)), mean=0, std=0.01))
-        self.B = nn.Parameter(torch.nn.init.trunc_normal_(torch.empty(64), mean=0, std=0.01))
+        self.W = torch.nn.Parameter(torch.nn.init.trunc_normal_(torch.empty((64, 3, 7, 7)), mean=0, std=0.01))
+        self.B = torch.nn.Parameter(torch.nn.init.trunc_normal_(torch.empty(64), mean=0, std=0.01))
         self.mask = self.con1.embeddings.patch_embeddings.backbone.bit.embedder.convolution
         self.mask.weight = self.W
         self.mask.bias = self.B
@@ -75,44 +75,6 @@ class TabCT(torch.nn.Module):
         self.ct_cnn = self.con1.encoder
         self.norm = self.con1.layernorm
         self.pooler = self.con1.pooler
-
-
-                        # model
-
-                self.con1.embeddings.patch_embeddings.num_channels = self.input_channel_after_mul
-                self.con1.embeddings.patch_embeddings.image_size = (self.input_size_after_mul , self.input_size_after_mul)
-
-                self.con1.embeddings.patch_embeddings.backbone.bit.config.num_channels = self.input_channel_after_mul
-
-                self.con1.embeddings.patch_embeddings.backbone.bit.embedder.num_channels = self.input_channel_after_mul
-
-                # First CNN Layer
-                self.conv = self.con1.embeddings.patch_embeddings.backbone.bit.embedder.convolution
-                # print("First CNN Layer")
-
-                # First Mask Layer
-                self.W = nn.Parameter(torch.nn.init.trunc_normal_(torch.empty((64, 3, 7, 7)), mean=0, std=0.01))
-                self.B = nn.Parameter(torch.nn.init.trunc_normal_(torch.empty(64), mean=0, std=0.01))
-                self.mask = self.con1.embeddings.patch_embeddings.backbone.bit.embedder.convolution
-                self.mask.weight = self.W
-                self.mask.bias = self.B
-                # print("First Mask Layer")
-
-                # Rest of Embeddings
-                self.embeddings = self.con1.embeddings
-                self.embeddings.patch_embeddings.backbone.bit.embedder.convolution = UnlearnableIdentityConvModel()
-                # print(self.embeddings)
-                # print("Rest of Embeddings")
-
-                # Encoder(ViT), layernorm, pooler layer
-                self.ct_cnn = self.con1.encoder
-                # print(self.ct_cnn)
-                self.norm = self.con1.layernorm
-                self.pooler = self.con1.pooler
-                # print("Encoder(ViT), layernorm, pooler layer")
-        
-
-
 
         # Secondary feature extractor (ResNet18)
         self.ct_cnn_s = models.resnet18(pretrained=True)
