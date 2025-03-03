@@ -124,7 +124,7 @@ class OSICData_train(torch.utils.data.Dataset):
 
             # List the image files and mask files for the patient, excluding the first and last 15% slices
             self.train_data[p] = os.listdir(f'{params.data_folder}/train/{p}/')[int(min_slice.iloc[0]):int(max_slice.iloc[0])] 
-            self.mask_data[p] = os.listdir(f'{params.data_folder}/mask_clear/{p}/')[int(min_slice.iloc[0]):int(max_slice.iloc[0])] 
+            self.mask_data[p] = os.listdir(f'{params.data_folder}/mask/{p}/')[int(min_slice.iloc[0]):int(max_slice.iloc[0])] 
             
             # Add each image file path to the all_data list
             for m in self.train_data[p]:
@@ -169,7 +169,7 @@ class OSICData_train(torch.utils.data.Dataset):
             
             # Load the image and mask using the get_img and get_mask functions
             img = get_img(f'{params.data_folder}/train/{k}')
-            mask = get_mask(f'{params.data_folder}/mask_clear/{j}')
+            mask = get_mask(f'{params.data_folder}/mask/{j}')
 
             # Append the mask, image, slope, and tabular features to the respective lists
             masks.append(mask)
@@ -216,7 +216,7 @@ class OSICData_test(torch.utils.data.Dataset):
 
             # Select a subset of slices by removing a percentage from the beginning and end
             self.train_data[p] = os.listdir(f'{params.data_folder}/train/{p}/')[int(params.strip_ct * p_n):-int(params.strip_ct * p_n)]
-            self.mask_data[p] = os.listdir(f'{params.data_folder}/mask_clear/{p}/')[int(params.strip_ct * p_n):-int(params.strip_ct * p_n)]
+            self.mask_data[p] = os.listdir(f'{params.data_folder}/mask/{p}/')[int(params.strip_ct * p_n):-int(params.strip_ct * p_n)]
 
     def __len__(self):
         # Return the total number of patients in the dataset
@@ -236,7 +236,7 @@ class OSICData_test(torch.utils.data.Dataset):
 
             # Load the image and corresponding mask
             img = get_img(f'{params.data_folder}/train/{k}/{i}')
-            mask = get_mask(f'{params.data_folder}/mask_clear/{k}/{j}')
+            mask = get_mask(f'{params.data_folder}/mask/{k}/{j}')
 
             # Append the data to respective lists
             masks.append(mask)
