@@ -1,0 +1,21 @@
+# PyTorch and related modules for deep learning
+torch
+torchvision
+transformers
+
+# General-purpose libraries
+numpy
+pandas
+matplotlib
+tqdm
+random
+os-sys
+
+# Image processing and medical imaging
+opencv-python
+pillow
+pydicom
+scikit-image  # skimage
+
+# Machine learning utilities
+scikit-learn
