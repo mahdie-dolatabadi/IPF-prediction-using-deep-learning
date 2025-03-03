@@ -41,6 +41,7 @@ IPF-PREDICTION-USING-DEEP-LEARNING
 │   ├── regiongrowing.m  
 │  
 │── README.md 
+│── requirements.txt
 ``` 
 ### 📦 Installation
 Provide instructions to set up the environment:
