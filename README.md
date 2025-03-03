@@ -42,6 +42,8 @@ IPF-PREDICTION-USING-DEEP-LEARNING
 │  
 │── README.md 
 ``` 
+📦 **Installation**  
+
 ### 🗂️ Dataset
 To download the dataset, use the following instructions:
 1.Install the Kaggle Python package:
