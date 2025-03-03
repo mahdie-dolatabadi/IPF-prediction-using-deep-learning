@@ -42,8 +42,13 @@ IPF-PREDICTION-USING-DEEP-LEARNING
 │  
 │── README.md 
 ``` 
-📦 **Installation**  
-
+### 📦 Installation
+Provide instructions to set up the environment:
+```plaintext
+git clone https://github.com/mahdie-dolatabadi/IPF-prediction-using-deep-learning.git
+cd IPF-PREDICTION-USING-DEEP-LEARNING
+pip install -r requirements.txt
+```
 ### 🗂️ Dataset
 To download the dataset, use the following instructions:
 1.Install the Kaggle Python package:
