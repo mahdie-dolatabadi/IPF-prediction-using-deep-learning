@@ -1,4 +1,58 @@
-import torch
+import torch # Torch modules for deep learning
+import numpy as np # Numerical computations and array operations
+import pandas as pd # Data manipulation and analysis
+import cv2 # OpenCV for image processing
+from skimage import exposure  # Module for image intensity adjustment and histogram-based operations, such as contrast enhancement and histogram equalization.
+from PIL import Image  # Image handling
+import pydicom  # Handling DICOM medical imaging files
+import os # OS-level operations (file paths, directory handling)
+import random # Random number generation
+from configs import HyperParameters
+
+params = HyperParameters("slope_train_vit_simple")
+# Load a range of images from a CSV file into a Pandas DataFrame
+images_range = pd.read_csv("images.csv")
+
+# ==================== Set Random Seed for Reproducibility ====================
+
+# Retrieve the seed value from the HyperP object
+seed = params.seed  
+
+# Set the seed for Python's built-in random module
+random.seed(seed)  
+
+# Set the PYTHONHASHSEED environment variable for hash-based operations 
+# to ensure deterministic results
+os.environ['PYTHONHASHSEED'] = str(seed)  
+
+# Set the seed for NumPy's random number generator
+np.random.seed(seed)  
+
+# Set the seed for PyTorch to ensure reproducibility of results
+torch.manual_seed(seed)  
+
+# Function to load and preprocess a medical image from a DICOM file
+def get_img(path):  
+    # Read the DICOM file using pydicom
+    d = pydicom.dcmread(path)
+    
+    # Extract the pixel array from the DICOM and enhance contrast using histogram equalization
+    # Resize the processed image to a fixed resolution of 384x384 using OpenCV
+    output = cv2.resize(exposure.equalize_hist(d.pixel_array), (384, 384))
+    
+    # Return the preprocessed image
+    return output
+
+# Function to load and preprocess a mask image
+def get_mask(path):
+    # Open the mask image using PIL (assumes it is a standard image format like PNG or JPEG)
+    mask = Image.open(path)
+    
+    # Convert the mask to a NumPy array and resize it to 384x384
+    mask = cv2.resize(np.array(mask), (384, 384))
+    
+    # Reshape the mask to ensure it has dimensions 384x384 (optional step for consistency)
+    return mask.reshape(384, 384)
 
 # Define a custom dataset class for training in PyTorch
 class OSICData_train(torch.utils.data.Dataset):
@@ -69,8 +123,8 @@ class OSICData_train(torch.utils.data.Dataset):
             max_slice = properties['max'] 
 
             # List the image files and mask files for the patient, excluding the first and last 15% slices
-            self.train_data[p] = os.listdir(f'{root_path}/train/{p}/')[int(min_slice.iloc[0]):int(max_slice.iloc[0])] 
-            self.mask_data[p] = os.listdir(f'{root_path}/mask_clear/{p}/')[int(min_slice.iloc[0]):int(max_slice.iloc[0])] 
+            self.train_data[p] = os.listdir(f'{params.data_folder}/train/{p}/')[int(min_slice.iloc[0]):int(max_slice.iloc[0])] 
+            self.mask_data[p] = os.listdir(f'{params.data_folder}/mask_clear/{p}/')[int(min_slice.iloc[0]):int(max_slice.iloc[0])] 
             
             # Add each image file path to the all_data list
             for m in self.train_data[p]:
@@ -114,8 +168,8 @@ class OSICData_train(torch.utils.data.Dataset):
             j = k[:-4] + '.jpg'
             
             # Load the image and mask using the get_img and get_mask functions
-            img = get_img(f'{root_path}/train/{k}')
-            mask = get_mask(f'{root_path}/mask_clear/{j}')
+            img = get_img(f'{params.data_folder}/train/{k}')
+            mask = get_mask(f'{params.data_folder}/mask_clear/{j}')
 
             # Append the mask, image, slope, and tabular features to the respective lists
             masks.append(mask)
@@ -127,8 +181,11 @@ class OSICData_train(torch.utils.data.Dataset):
             print(k, j)
 
         # Convert the masks, images, slopes, and tabular features into PyTorch tensors
-        masks, x, a, tab = torch.tensor(np.asanyarray(masks), dtype=torch.float32), torch.tensor(np.asanyarray(x), dtype=torch.float32), torch.tensor(np.asanyarray(a), dtype=torch.float32), torch.tensor(np.asanyarray(tab), dtype=torch.float32)
-        
+        masks = torch.tensor(np.asanyarray(masks), dtype=torch.float32)
+        x = torch.tensor(np.asanyarray(x), dtype=torch.float32)
+        a = torch.tensor(np.asanyarray(a), dtype=torch.float32)
+        tab = torch.tensor(np.asanyarray(tab), dtype=torch.float32)
+
         # Remove the extra dimension from the tabular feature tensor
         tab = torch.squeeze(tab, axis=0)
 
@@ -155,11 +212,11 @@ class OSICData_test(torch.utils.data.Dataset):
             max_slice = properties['max'] 
 
             # Get the total number of slices available for the patient
-            p_n = len(os.listdir(f'{root_path}/train/{p}/'))
+            p_n = len(os.listdir(f'{params.data_folder}/train/{p}/'))
 
             # Select a subset of slices by removing a percentage from the beginning and end
-            self.train_data[p] = os.listdir(f'{root_path}/train/{p}/')[int(hyp.strip_ct * p_n):-int(hyp.strip_ct * p_n)]
-            self.mask_data[p] = os.listdir(f'{root_path}/mask_clear/{p}/')[int(hyp.strip_ct * p_n):-int(hyp.strip_ct * p_n)]
+            self.train_data[p] = os.listdir(f'{params.data_folder}/train/{p}/')[int(params.strip_ct * p_n):-int(params.strip_ct * p_n)]
+            self.mask_data[p] = os.listdir(f'{params.data_folder}/mask_clear/{p}/')[int(params.strip_ct * p_n):-int(params.strip_ct * p_n)]
 
     def __len__(self):
         # Return the total number of patients in the dataset
@@ -178,8 +235,8 @@ class OSICData_test(torch.utils.data.Dataset):
             j = i[:-4] + '.jpg'  # Convert filename to mask format (assuming a different extension)
 
             # Load the image and corresponding mask
-            img = get_img(f'{root_path}/train/{k}/{i}')
-            mask = get_mask(f'{root_path}/mask_clear/{k}/{j}')
+            img = get_img(f'{params.data_folder}/train/{k}/{i}')
+            mask = get_mask(f'{params.data_folder}/mask_clear/{k}/{j}')
 
             # Append the data to respective lists
             masks.append(mask)
