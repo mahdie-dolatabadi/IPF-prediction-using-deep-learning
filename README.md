@@ -9,17 +9,41 @@ This repository presents a deep learning approach to predict the progression of 
 ![Alt Text](images/overview.png)
 ### 📂 Repository Structure
 ```plaintext
-IPF-prediction-using-deep-learning/
-│── region_growing/ # Folder for the region growing technique
-│   ├── main.m # MATLAB scripts for region growing
-│── model/ # Main model and configuration files
-│   ├── config.py # Configuration files (hyperparameters, settings, etc.)
-│   ├── main.py # Main scripts for training/testing
-│   ├── utils.py # Utility functions and helper scripts
-│── dataset/ # Dataset files or dataset links
-│── diagrams/ # Workflow diagrams in PNG format
-│── README.md # Main project documentation
-│── .gitignore # Ignore unnecessary files
+IPF-PREDICTION-USING-DEEP-LEARNING  
+│── images/  
+│   ├── overview.png  
+│  
+│── main/  
+│   ├── results_slopes/  
+│   │   ├── september8th/    
+│   ├── vit_b_16simplestep2hybrid.txt  
+│   ├── configs.py  
+│   ├── dataset.py  
+│   ├── images.csv  
+│   ├── main.ipynb  
+│   ├── model.py  
+│   ├── train_test.py  
+│   ├── utils.py  
+│  
+│── RegionGrowing/  
+│   ├── images/  
+│   │   ├── bottom-image.png  
+│   │   ├── bottom-mask.png  
+│   │   ├── down.dcm  
+│   │   ├── middle-image.png  
+│   │   ├── middle-mask.png  
+│   │   ├── middle.dcm  
+│   │   ├── up-image.png  
+│   │   ├── up-mask.png  
+│   │   ├── up.dcm  
+│   ├── load_display_dicom.m  
+│   ├── main.m  
+│   ├── regiongrowing.m  
+│  
+│── README.md  
+
+
+
 
 
 
