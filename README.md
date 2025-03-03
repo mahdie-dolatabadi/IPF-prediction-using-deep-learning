@@ -52,23 +52,23 @@ pip install -r requirements.txt
 ```
 ### 🗂️ Dataset
 To download the dataset, use the following instructions:
-1.Install the Kaggle Python package:
+1. Install the Kaggle Python package:
 ```plaintext
 pip install kaggle
 ```
-2.You need a Kaggle API key to authenticate:
+2. You need a Kaggle API key to authenticate:
 -Go to Kaggle.
 -Click on your profile (top right) > Account.
 -Scroll down to the API section.
 -Click Create New API Token – this will download a kaggle.json file.
 
-3.Move the downloaded kaggle.json file to your Kaggle configuration directory:
+3. Move the downloaded kaggle.json file to your Kaggle configuration directory:
 ```plaintext
 mkdir -p ~/.kaggle
 mv ~/Downloads/kaggle.json ~/.kaggle/
 chmod 600 ~/.kaggle/kaggle.json  # Secure file permissions
 ```
-4.Download a Kaggle Competition Dataset and extract it:
+4. Download a Kaggle Competition Dataset and extract it:
 ```plaintext
 kaggle competitions download -c osic-pulmonary-fibrosis-progression
 unzip osic-pulmonary-fibrosis-progression.zip
