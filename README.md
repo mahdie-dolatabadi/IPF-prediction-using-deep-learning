@@ -57,7 +57,7 @@ To download the dataset, use the following instructions:
 pip install kaggle
 ```
 2. You need a Kaggle API key to authenticate:
--Go to Kaggle.
+> -Go to Kaggle.
 -Click on your profile (top right) > Account.
 -Scroll down to the API section.
 -Click Create New API Token – this will download a kaggle.json file.
