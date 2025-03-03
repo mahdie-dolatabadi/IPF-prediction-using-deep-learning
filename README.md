@@ -18,8 +18,7 @@ IPF-PREDICTION-USING-DEEP-LEARNING
 │   │   ├── september8th/    
 │   ├── vit_b_16simplestep2hybrid.txt  
 │   ├── configs.py  
-│   ├── dataset.py  
-│   ├── images.csv  
+│   ├── dataset.py   
 │   ├── main.ipynb  
 │   ├── model.py  
 │   ├── train_test.py  
@@ -40,6 +39,7 @@ IPF-PREDICTION-USING-DEEP-LEARNING
 │   ├── main.m  
 │   ├── regiongrowing.m  
 │  
+├── images.csv 
 │── README.md 
 │── requirements.txt
 ``` 
