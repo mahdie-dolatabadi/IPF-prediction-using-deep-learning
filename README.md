@@ -74,7 +74,17 @@ kaggle competitions download -c osic-pulmonary-fibrosis-progression
 unzip osic-pulmonary-fibrosis-progression.zip
 ```
 
+## Citation
 
+If you find our code or paper useful, please cite as:
+
+```bibtex
+@article{dolatabadi2025prognostic,
+  title={Prognostic Model for Idiopathic Pulmonary Fibrosis Using Context-Aware Sequential-Parallel Hybrid Transformer and Enriched Clinical Information},
+  author={Dolatabadi, Mahdie and Nabavi, Shahabedin and Moghaddam, Mohsen Ebrahimi},
+  journal={arXiv preprint arXiv:2503.00386},
+  year={2025}
+}
 
 
 
