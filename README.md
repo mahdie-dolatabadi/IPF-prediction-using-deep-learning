@@ -79,11 +79,18 @@ unzip osic-pulmonary-fibrosis-progression.zip
 If you find our code or paper useful, please cite as:
 
 ```bibtex
-@article{dolatabadi2025prognostic,
-  title={Prognostic Model for Idiopathic Pulmonary Fibrosis Using Context-Aware Sequential-Parallel Hybrid Transformer and Enriched Clinical Information},
-  author={Dolatabadi, Mahdie and Nabavi, Shahabedin and Moghaddam, Mohsen Ebrahimi},
-  journal={arXiv preprint arXiv:2503.00386},
-  year={2025}
+@article{DOLATABADI2026108958,
+title = {Prognostic model for idiopathic pulmonary fibrosis using context-aware sequential-parallel hybrid transformer and enriched clinical information},
+journal = {Biomedical Signal Processing and Control},
+volume = {113},
+pages = {108958},
+year = {2026},
+issn = {1746-8094},
+doi = {https://doi.org/10.1016/j.bspc.2025.108958},
+url = {https://www.sciencedirect.com/science/article/pii/S1746809425014697},
+author = {Mahdie Dolatabadi and Shahabedin Nabavi and Mohsen Ebrahimi Moghaddam},
+keywords = {Idiopathic pulmonary fibrosis, Forced vital capacity, Computed tomography, Deep learning},
+abstract = {Idiopathic pulmonary fibrosis (IPF) is a progressive disease that irreversibly transforms lung tissue into rigid fibrotic structures, leading to debilitating symptoms such as shortness of breath and chronic fatigue. The heterogeneity and complexity of this disease, particularly regarding its severity and progression rate, have made predicting its future course a complex and challenging task. Besides, traditional diagnostic methods based on clinical evaluations and imaging have limitations in capturing the disease’s complexity. Using the Kaggle Pulmonary Fibrosis Progression dataset, which includes computed tomography images, and clinical information, the model predicts changes in forced vital capacity (FVC), a key progression indicator. Our method uses a proposed context-aware sequential-parallel hybrid transformer model and clinical information enrichment for its prediction. The proposed method achieved a Laplace Log-Likelihood score of −6.508, outperforming prior methods and demonstrating superior predictive capabilities. These results highlight the potential of advanced deep learning techniques to provide more accurate and timely predictions, offering a transformative approach to the diagnosis and management of IPF, with implications for improved patient outcomes and therapeutic advancements. Code Availability: GitHub}
 }
 
 
