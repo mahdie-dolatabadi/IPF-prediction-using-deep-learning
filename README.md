@@ -1,7 +1,5 @@
 # IPF-prediction-using-deep-learning
-### 📄 Related Paper: [<div style="margin-top: 20px;">
-<img src="https://github.com/mahdie-dolatabadi/IPF-prediction-using-deep-learning/blob/main/images/BSPC.png" width="116px" height="50px" >
-</div>](https://doi.org/10.1016/j.bspc.2025.108958) [![arXiv](https://img.shields.io/badge/arXiv-2503.00386-red)](https://arxiv.org/abs/2503.00386)
+### 📄 Related Paper: [<div style="margin-top: 20px;"><img src="https://github.com/mahdie-dolatabadi/IPF-prediction-using-deep-learning/blob/main/images/BSPC.png" width="116px" height="50px" ></div>](https://doi.org/10.1016/j.bspc.2025.108958) [![arXiv](https://img.shields.io/badge/arXiv-2503.00386-red)](https://arxiv.org/abs/2503.00386)
 ### 👋 Introduction 
 
 Welcome to the IPF Prediction Using Deep Learning project! Idiopathic pulmonary fibrosis (IPF) is a progressive disease that irreversibly transforms lung tissue into rigid fibrotic structures, leading to debilitating symptoms such as shortness of breath and chronic fatigue. The heterogeneity and complexity of this disease, particularly regarding its severity and progression rate, have made predicting its future course a complex and challenging task. Besides, traditional diagnostic methods based on clinical evaluations and imaging have limitations in capturing the disease’s complexity.
