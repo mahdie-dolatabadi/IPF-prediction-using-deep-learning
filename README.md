@@ -100,7 +100,7 @@ indicator. Our method uses a proposed context-aware sequential-parallel hybrid t
 enrichment for its prediction. The proposed method achieved a Laplace Log-Likelihood score of −6.508, outperforming prior methods
 and demonstrating superior predictive capabilities. These results highlight the potential of advanced deep learning techniques to
 provide more accurate and timely predictions, offering a transformative approach to the diagnosis and management of IPF, with
-implications for improved patient outcomes and therapeutic advancements. Code Availability:[GitHub](https://github.com/mahdie-dolatabadi/IPF-prediction-using-deep-learning)},
+implications for improved patient outcomes and therapeutic advancements. Code Availability: GitHub}
 }
 
 
